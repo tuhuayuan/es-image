@@ -16,7 +16,7 @@
 # to work with Kubernetes logging. Inspired by the Dockerfile
 # dockerfile/elasticsearch
 
-FROM java:openjdk-7-jre
+FROM java:openjdk-8-jre
 MAINTAINER Satnam Singh "satnam@google.com"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -26,14 +26,14 @@ RUN apt-get update && \
     apt-get clean
 
 RUN cd / && \
-    curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.2.tar.gz && \
-    tar xf elasticsearch-1.5.2.tar.gz && \
-    rm elasticsearch-1.5.2.tar.gz
+    curl -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.3/elasticsearch-2.3.3.tar.gz && \
+    tar xf elasticsearch-2.3.3.tar.gz && \
+    rm elasticsearch-2.3.3.tar.gz
 
-RUN mkdir -p /elasticsearch-1.5.2/config/templates
+RUN mkdir -p /elasticsearch-2.3.3/config/templates
 
-COPY elasticsearch.yml /elasticsearch-1.5.2/config/elasticsearch.yml
-COPY template-k8s-logstash.json /elasticsearch-1.5.2/config/templates/template-k8s-logstash.json
+COPY elasticsearch.yml /elasticsearch-2.3.3/config/elasticsearch.yml
+COPY template-k8s-logstash.json /elasticsearch-2.3.3/config/templates/template-k8s-logstash.json
 COPY run.sh /
 COPY elasticsearch_logging_discovery /
 
